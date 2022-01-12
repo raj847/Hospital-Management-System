@@ -4,8 +4,6 @@ import (
 	"finalproject/features/doctor"
 	"time"
 
-	docsesentity "finalproject/features/docses/data"
-
 	"gorm.io/gorm"
 )
 
@@ -25,7 +23,6 @@ type Doctor struct {
 	Token           string
 	CreatedAt       time.Time
 	UpdatedAt       time.Time
-	DoctorSession   docsesentity.Docses `gorm:"foreignKey:ID;references:DoctorSessionID"`
 }
 
 func toDomain(doc Doctor) doctor.Domain {
@@ -44,7 +41,6 @@ func toDomain(doc Doctor) doctor.Domain {
 		Token:           doc.Token,
 		CreatedAt:       doc.CreatedAt,
 		UpdatedAt:       doc.UpdatedAt,
-		DoctorSession:   docsesentity.ToDomain(doc.DoctorSession),
 	}
 }
 
@@ -82,7 +78,6 @@ func toDomainUpdate(doc Doctor) doctor.Domain {
 		Token:           doc.Token,
 		CreatedAt:       doc.CreatedAt,
 		UpdatedAt:       doc.UpdatedAt,
-		DoctorSession:   docsesentity.ToDomain(doc.DoctorSession),
 	}
 }
 func toDomainList(data []Doctor) []doctor.Domain {
