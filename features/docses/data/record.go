@@ -17,7 +17,7 @@ type Docses struct {
 	UpdatedAt time.Time
 }
 
-func ToDomain(ds Docses) docses.Domain {
+func toDomain(ds Docses) docses.Domain {
 	return docses.Domain{
 		ID:        ds.ID,
 		AdminID:   ds.AdminID,
@@ -53,7 +53,7 @@ func toDomainList(data []Docses) []docses.Domain {
 	result := []docses.Domain{}
 
 	for _, ds := range data {
-		result = append(result, ToDomain(ds))
+		result = append(result, toDomain(ds))
 	}
 	return result
 }
