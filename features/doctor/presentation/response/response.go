@@ -12,19 +12,20 @@ import (
 )
 
 type DoctorRegisterResponse struct {
-	Message      string    `json:"message"`
-	ID           int       `json:"id:"`
-	Username     string    `json:"username"`
-	Password     string    `json:"password"`
-	Name         string    `json:"name"`
-	NIP          string    `json:"nip"`
-	Experience   string    `json:"experience"`
-	Spesialist   string    `json:"specialist"`
-	Room         string    `json:"room"`
-	Phone_Number string    `json:"phone_number"`
-	Status       string    `json:"status"`
-	CreatedAt    time.Time `json:"created_at"`
-	UpdatedAt    time.Time `json:"updated_at"`
+	Message       string                    `json:"message"`
+	ID            int                       `json:"id:"`
+	Username      string                    `json:"username"`
+	Password      string                    `json:"password"`
+	Name          string                    `json:"name"`
+	NIP           string                    `json:"nip"`
+	Experience    string                    `json:"experience"`
+	Spesialist    string                    `json:"specialist"`
+	Room          string                    `json:"room"`
+	Phone_Number  string                    `json:"phone_number"`
+	Status        string                    `json:"status"`
+	CreatedAt     time.Time                 `json:"created_at"`
+	UpdatedAt     time.Time                 `json:"updated_at"`
+	DoctorSession docsesResp.DocsesResponse `json:"doctor_session"`
 }
 type DoctorResponse struct {
 	ID            int                       `json:"id:"`
