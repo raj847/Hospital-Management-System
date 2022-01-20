@@ -102,3 +102,17 @@ func (rep *MysqlDoctorRepository) AllDoctor() ([]doctor.Domain, error) {
 	return toDomainList(pat), nil
 
 }
+func (rep *MysqlDoctorRepository) ChangePass(docID int, domain *doctor.Domain) (doctor.Domain, error) {
+
+	passUpdate := fromDomain(*domain)
+
+	passUpdate.ID = docID
+
+	result := rep.Conn.Where("id = ?", docID).Updates(&passUpdate)
+
+	if result.Error != nil {
+		return doctor.Domain{}, bussiness.ErrNotFound
+	}
+
+	return toDomainUpdatePass(passUpdate), nil
+}

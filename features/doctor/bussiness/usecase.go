@@ -103,3 +103,19 @@ func (serv *serviceDoctor) AllDoctor() ([]doctor.Domain, error) {
 
 	return result, nil
 }
+func (serv *serviceDoctor) ChangePass(docID int, domain *doctor.Domain) (doctor.Domain, error) {
+
+	hashedPassword, err := encrypt.HashingPassword(domain.Password)
+	domain.Password = hashedPassword
+	result, err := serv.doctorRepository.ChangePass(docID, domain)
+
+	// if domain.ConfirmPass != domain.Password {
+	// 	return doctor.Domain{}, ErrPassNotSame
+	// }
+
+	if err != nil {
+		return doctor.Domain{}, err
+	}
+
+	return result, nil
+}

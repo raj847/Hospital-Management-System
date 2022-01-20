@@ -8,7 +8,8 @@ var (
 	ErrInternalServer = errors.New("internal server error")
 	ErrNotFound       = errors.New("not found")
 	ErrUnathorized    = errors.New("unauthorized")
+	ErrPassNotSame    = errors.New("Password not same")
 
 	ErrEmail = errors.New("incorrect email")
-	ErrPass = errors.New("incorrect password")
+	ErrPass  = errors.New("incorrect password")
 )
