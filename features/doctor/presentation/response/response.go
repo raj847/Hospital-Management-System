@@ -68,13 +68,13 @@ func NewErrorResponse(c echo.Context, status int, err error) error {
 	return c.JSON(status, response)
 }
 
-func NewErrorResponse1(c echo.Context, status int, err error) error {
-	response := BaseResponse{}
-	response.Meta.Status = status
-	response.Meta.Message = "Password Not Same"
+// func NewErrorResponse1(c echo.Context, status int, err error) error {
+// 	response := BaseResponse{}
+// 	response.Meta.Status = status
+// 	response.Meta.Message = "Password Not Same"
 
-	return c.JSON(status, response)
-}
+// 	return c.JSON(status, response)
+// }
 
 func FromDomainRegister(domain doctor.Domain) DoctorRegisterResponse {
 	return DoctorRegisterResponse{
