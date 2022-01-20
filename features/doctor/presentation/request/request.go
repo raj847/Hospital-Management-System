@@ -22,7 +22,7 @@ type ChangePass struct {
 	ConfirmPass string `json:"confirmpassword"`
 }
 
-func (req *ChangePass) toDomainChange() *doctor.Domain {
+func (req *ChangePass) ToDomainChange() *doctor.Domain {
 	return &doctor.Domain{
 		Password: req.Password,
 	}

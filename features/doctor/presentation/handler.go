@@ -120,7 +120,6 @@ func (ctrl *DoctorHandler) AllDoctor(c echo.Context) error {
 func (ctrl *DoctorHandler) ChangePass(c echo.Context) error {
 
 	changeReq := request.ChangePass{}
-	updateReq := request.Doctor{}
 
 	if err := c.Bind(&changeReq); err != nil {
 		return response.NewErrorResponse(c, http.StatusBadRequest, err)
@@ -129,7 +128,7 @@ func (ctrl *DoctorHandler) ChangePass(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 
 	getData, _ := ctrl.doctorHand.DoctorByID(id)
-	result, err := ctrl.doctorHand.ChangePass(id, updateReq.ToDomain())
+	result, err := ctrl.doctorHand.ChangePass(id, changeReq.ToDomainChange())
 	result.ID = getData.ID
 
 	result.Name = getData.Name
