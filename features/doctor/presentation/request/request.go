@@ -25,6 +25,7 @@ type ChangePass struct {
 func (req *ChangePass) ToDomainChange() *doctor.Domain {
 	return &doctor.Domain{
 		Password: req.Password,
+		ConfirmPass: req.ConfirmPass,
 	}
 }
 

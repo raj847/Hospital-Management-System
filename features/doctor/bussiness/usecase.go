@@ -109,9 +109,6 @@ func (serv *serviceDoctor) ChangePass(docID int, domain *doctor.Domain) (doctor.
 	domain.Password = hashedPassword
 	result, err := serv.doctorRepository.ChangePass(docID, domain)
 
-	// if domain.ConfirmPass != domain.Password {
-	// 	return doctor.Domain{}, ErrPassNotSame
-	// }
 
 	if err != nil {
 		return doctor.Domain{}, err
