@@ -10,7 +10,6 @@ type Domain struct {
 	DoctorSessionID int
 	Username        string
 	Password        string
-	ConfirmPass     string
 	Name            string
 	NIP             string
 	Experience      string

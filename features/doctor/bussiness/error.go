@@ -10,6 +10,6 @@ var (
 	ErrUnathorized    = errors.New("unauthorized")
 	ErrPassNotSame    = errors.New("Password not same")
 
-	ErrEmail = errors.New("incorrect email")
+	ErrEmail = errors.New("incorrect username")
 	ErrPass  = errors.New("incorrect password")
 )

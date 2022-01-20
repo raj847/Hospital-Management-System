@@ -49,7 +49,7 @@ func (ctrl *DoctorHandler) Login(c echo.Context) error {
 	}
 	result, err := ctrl.doctorHand.Login(loginReq.Username, loginReq.Password)
 	if err != nil {
-		if err == bussiness.ErrEmail {
+		if err == bussiness.ErrEmailorPass {
 			return response.NewErrorResponse(c, http.StatusNotFound, err)
 		} else if err == bussiness.ErrPass {
 			return response.NewErrorResponse(c, http.StatusUnauthorized, err)

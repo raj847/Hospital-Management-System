@@ -37,7 +37,7 @@ func (rep *MysqlDoctorRepository) Login(username, password string) (doctor.Domai
 	err := rep.Conn.First(&doc, "username = ?", username).Error
 
 	if err != nil {
-		return doctor.Domain{}, bussiness.ErrEmail
+		return doctor.Domain{}, bussiness.ErrEmailorPass
 	}
 
 	return ToDomain(doc), nil

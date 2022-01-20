@@ -2,10 +2,11 @@ package presentation
 
 import (
 	"finalproject/features/admins"
+	"finalproject/features/admins/bussiness"
 	"finalproject/features/admins/presentation/request"
 	"finalproject/features/admins/presentation/response"
 	"net/http"
-	"finalproject/features/admins/bussiness"
+
 	"github.com/labstack/echo/v4"
 )
 
@@ -46,9 +47,9 @@ func (ctrl *AdminHandler) Login(c echo.Context) error {
 	}
 	result, err := ctrl.adminHand.Login(loginReq.Username, loginReq.Password)
 	if err != nil {
-		if err == bussiness.ErrEmail{
+		if err == bussiness.ErrEmailorPass {
 			return response.NewErrorResponse(c, http.StatusNotFound, err)
-		}else if err == bussiness.ErrPass{
+		} else if err == bussiness.ErrPass {
 			return response.NewErrorResponse(c, http.StatusUnauthorized, err)
 		}
 		return response.NewErrorResponse(c, http.StatusInternalServerError, err)
