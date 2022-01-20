@@ -10,6 +10,7 @@ type Domain struct {
 	DoctorSessionID int
 	Username        string
 	Password        string
+	ConfirmPass     string
 	Name            string
 	NIP             string
 	Experience      string
@@ -30,6 +31,7 @@ type Service interface {
 	DoctorByID(id int) (Domain, error)
 	Delete(docID, id int) (string, error)
 	AllDoctor() ([]Domain, error)
+	ChangePass(docID int, domain *Domain) (Domain, error)
 }
 
 type Repository interface {
@@ -39,4 +41,5 @@ type Repository interface {
 	DoctorByID(id int) (Domain, error)
 	Delete(docID, id int) (string, error)
 	AllDoctor() ([]Domain, error)
+	ChangePass(docID int, domain *Domain) (Domain, error)
 }
