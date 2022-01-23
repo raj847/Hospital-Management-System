@@ -7,7 +7,6 @@ import (
 type Doctor struct {
 	DoctorSessionID int    `json:"doctorsessionid"`
 	Username        string `json:"username"`
-	Password        string `json:"password"`
 	Name            string `json:"name"`
 	NIP             string `json:"nip"`
 	Experience      string `json:"experience"`
@@ -32,7 +31,6 @@ func (req *Doctor) ToDomain() *doctor.Domain {
 	return &doctor.Domain{
 		DoctorSessionID: req.DoctorSessionID,
 		Username:        req.Username,
-		Password:        req.Password,
 		Name:            req.Name,
 		NIP:             req.NIP,
 		Experience:      req.Experience,

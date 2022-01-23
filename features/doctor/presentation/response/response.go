@@ -117,7 +117,6 @@ func FromDomainUpdateDoctor(domain doctor.Domain) DoctorRegisterResponse {
 		Message:      "Update Doctor Success",
 		ID:           domain.ID,
 		Username:     domain.Username,
-		Password:     domain.Password,
 		Name:         domain.Name,
 		NIP:          domain.NIP,
 		Experience:   domain.Experience,

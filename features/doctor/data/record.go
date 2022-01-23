@@ -71,7 +71,6 @@ func toDomainUpdate(doc Doctor) doctor.Domain {
 		ID:              doc.ID,
 		DoctorSessionID: doc.DoctorSessionID,
 		Username:        doc.Username,
-		Password:        doc.Password,
 		Name:            doc.Name,
 		NIP:             doc.NIP,
 		Experience:      doc.Experience,
