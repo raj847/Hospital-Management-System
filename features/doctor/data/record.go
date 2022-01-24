@@ -66,6 +66,23 @@ func fromDomain(domain doctor.Domain) Doctor {
 		UpdatedAt:       domain.UpdatedAt,
 	}
 }
+func fromDomainUpdate(domain doctor.Domain) Doctor {
+	return Doctor{
+		ID:              domain.ID,
+		DoctorSessionID: domain.DoctorSessionID,
+		Username:        domain.Username,
+		Name:            domain.Name,
+		NIP:             domain.NIP,
+		Experience:      domain.Experience,
+		Specialist:      domain.Specialist,
+		Room:            domain.Room,
+		Phone_Number:    domain.Phone_Number,
+		Status:          domain.Status,
+		Token:           domain.Token,
+		CreatedAt:       domain.CreatedAt,
+		UpdatedAt:       domain.UpdatedAt,
+	}
+}
 func toDomainUpdate(doc Doctor) doctor.Domain {
 	return doctor.Domain{
 		ID:              doc.ID,
