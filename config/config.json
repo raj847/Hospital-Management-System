@@ -7,10 +7,10 @@
     "timeout": 2
   },
   "database": {
-    "host": "127.0.0.1",
+    "host": "finalproject.cvtknwsvykds.us-east-2.rds.amazonaws.com",
     "port": "3306",
-    "user": "root",
-    "pass": "",
+    "user": "admin",
+    "pass": "Finalproject",
     "name": "finalproject"
   },
   "jwt": {
