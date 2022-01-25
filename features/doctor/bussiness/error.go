@@ -9,6 +9,6 @@ var (
 	ErrNotFound       = errors.New("not found")
 	ErrUnathorized    = errors.New("unauthorized")
 
-	ErrEmail = errors.New("incorrect email")
-	ErrPass = errors.New("incorrect password")
+	ErrEmail = errors.New("incorrect username")
+	ErrPass  = errors.New("incorrect password")
 )

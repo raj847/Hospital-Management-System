@@ -97,6 +97,7 @@ func FromDomainRegister(domain doctor.Domain) DoctorRegisterResponse {
 type DoctorLoginResponse struct {
 	Message string `json:"message"`
 	Token   string `json:"token"`
+	ID      int    `json:"id"`
 }
 
 type DoctorCPResponse struct {
@@ -110,6 +111,7 @@ func FromDomainLogin(domain doctor.Domain) DoctorLoginResponse {
 	return DoctorLoginResponse{
 		Message: "Doctor Login Success",
 		Token:   domain.Token,
+		ID:      domain.ID,
 	}
 }
 func FromDomainUpdateDoctor(domain doctor.Domain) DoctorRegisterResponse {
