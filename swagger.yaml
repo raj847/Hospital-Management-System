@@ -16,8 +16,7 @@ tags:
   - name: "Outpatientses"
   - name: "Doctorses"
   - name: "Patientschedule"
-# schemes:
-#   - "http"
+
 consumes:
   - "application/json"
 produces:
