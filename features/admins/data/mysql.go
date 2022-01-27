@@ -35,7 +35,7 @@ func (rep *MysqlAdminRepository) Login(username, password string) (admins.Domain
 	err := rep.Conn.First(&admin, "username = ?", username).Error
 
 	if err != nil {
-		return admins.Domain{}, bussiness.ErrEmail
+		return admins.Domain{}, bussiness.ErrEmailorPass
 	}
 
 	return toDomain(admin), nil
