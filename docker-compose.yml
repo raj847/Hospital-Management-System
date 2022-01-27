@@ -21,17 +21,6 @@ services:
       restart_policy:
         condition: on-failure
 
-  hms:
-    image: hms
-    container_name: hms
-    hostname: db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com
-    networks:
-      - mynetwork
-    volumes:
-      - hms-volume:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?database password not set}
-
 volumes:
   hms-volume:
 
