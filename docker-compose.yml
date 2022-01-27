@@ -21,7 +21,7 @@ services:
       restart_policy:
         condition: on-failure
 
-  db-hms:
+  hms:
     hostname: db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com
     networks:
       - mynetwork
