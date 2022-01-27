@@ -21,6 +21,12 @@ services:
       restart_policy:
         condition: on-failure
 
+  hms:
+    container_name: hms
+    hostname: db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com
+    networks:
+      - mynetwork
+
 volumes:
   hms-volume:
 
