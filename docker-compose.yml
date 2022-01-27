@@ -7,23 +7,9 @@ services:
       context: .
       dockerfile: Dockerfile
 
-    depends_on:
-      - hms
-    container_name: server
-    hostname: server
-    networks:
-      - mynetwork
-
     ports:
       - 8080:8080
 
     deploy:
       restart_policy:
         condition: on-failure
-        hostname: db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com
-        networks:
-          - mynetwork
-
-networks:
-  mynetwork:
-    driver: bridge
