@@ -7,10 +7,10 @@
     "timeout": 2
   },
   "database": {
-    "host": "hms",
+    "host": "db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com",
     "port": "3306",
-    "user": "root",
-    "pass": "123456",
+    "user": "admin",
+    "pass": "12345678",
     "name": "db_hms"
   },
   "jwt": {

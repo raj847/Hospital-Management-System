@@ -22,9 +22,9 @@ services:
         condition: on-failure
 
   hms:
-    image: mysql:8.0
+    image: hms
     container_name: hms
-    hostname: hms
+    hostname: db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com
     networks:
       - mynetwork
     volumes:
