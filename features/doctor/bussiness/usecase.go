@@ -61,6 +61,17 @@ func (serv *serviceDoctor) Login(email, password string) (doctor.Domain, error) 
 
 	return result, nil
 }
+func (serv *serviceDoctor) AllDoctor() ([]doctor.Domain, error) {
+
+	result, err := serv.doctorRepository.AllDoctor()
+
+	if err != nil {
+		return []doctor.Domain{}, err
+	}
+
+	return result, nil
+}
+
 func (serv *serviceDoctor) Update(docID int, domain *doctor.Domain) (doctor.Domain, error) {
 
 	hashedPassword, err := encrypt.HashingPassword(domain.Password)
@@ -73,6 +84,20 @@ func (serv *serviceDoctor) Update(docID int, domain *doctor.Domain) (doctor.Doma
 
 	return result, nil
 }
+
+func (serv *serviceDoctor) ChangePass(docID int, domain *doctor.Domain) (doctor.Domain, error) {
+
+	hashedPassword, err := encrypt.HashingPassword(domain.Password)
+	domain.Password = hashedPassword
+	result, err := serv.doctorRepository.ChangePass(docID, domain)
+
+	if err != nil {
+		return doctor.Domain{}, err
+	}
+
+	return result, nil
+}
+
 func (serv *serviceDoctor) DoctorByID(id int) (doctor.Domain, error) {
 
 	result, err := serv.doctorRepository.DoctorByID(id)
@@ -83,22 +108,13 @@ func (serv *serviceDoctor) DoctorByID(id int) (doctor.Domain, error) {
 
 	return result, nil
 }
+
 func (serv *serviceDoctor) Delete(docID int, id int) (string, error) {
 
 	result, err := serv.doctorRepository.Delete(docID, id)
 
 	if err != nil {
 		return "", ErrNotFound
-	}
-
-	return result, nil
-}
-func (serv *serviceDoctor) AllDoctor() ([]doctor.Domain, error) {
-
-	result, err := serv.doctorRepository.AllDoctor()
-
-	if err != nil {
-		return []doctor.Domain{}, err
 	}
 
 	return result, nil

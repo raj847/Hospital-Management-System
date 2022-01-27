@@ -1,8 +1,10 @@
 package data
 
 import (
+	"encoding/json"
 	"finalproject/features/doctor"
 	"finalproject/features/doctor/bussiness"
+	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -40,9 +42,10 @@ func (rep *MysqlDoctorRepository) Login(username, password string) (doctor.Domai
 
 	return ToDomain(doc), nil
 }
+
 func (rep *MysqlDoctorRepository) Update(docID int, domain *doctor.Domain) (doctor.Domain, error) {
 
-	profileUpdate := fromDomain(*domain)
+	profileUpdate := fromDomainUpdate(*domain)
 
 	profileUpdate.ID = docID
 
@@ -54,6 +57,7 @@ func (rep *MysqlDoctorRepository) Update(docID int, domain *doctor.Domain) (doct
 
 	return toDomainUpdate(profileUpdate), nil
 }
+
 func (rep *MysqlDoctorRepository) DoctorByID(id int) (doctor.Domain, error) {
 
 	var doc Doctor
@@ -66,6 +70,22 @@ func (rep *MysqlDoctorRepository) DoctorByID(id int) (doctor.Domain, error) {
 
 	return ToDomain(doc), nil
 }
+
+func (rep *MysqlDoctorRepository) ChangePass(docID int, domain *doctor.Domain) (doctor.Domain, error) {
+
+	passUpdate := fromDomain(*domain)
+
+	passUpdate.ID = docID
+
+	result := rep.Conn.Where("id = ?", docID).Updates(&passUpdate)
+
+	if result.Error != nil {
+		return doctor.Domain{}, bussiness.ErrNotFound
+	}
+
+	return toDomainUpdatePass(passUpdate), nil
+}
+
 func (rep *MysqlDoctorRepository) Delete(docID int, id int) (string, error) {
 	rec := Doctor{}
 
@@ -84,11 +104,15 @@ func (rep *MysqlDoctorRepository) Delete(docID int, id int) (string, error) {
 	return "Product has been delete", nil
 
 }
+
 func (rep *MysqlDoctorRepository) AllDoctor() ([]doctor.Domain, error) {
 
 	var pat []Doctor
 
 	result := rep.Conn.Preload("DoctorSession").Find(&pat)
+
+	ss, _ := json.MarshalIndent(pat, "", " ")
+	fmt.Println(string(ss))
 
 	if result.Error != nil {
 		return []doctor.Domain{}, result.Error

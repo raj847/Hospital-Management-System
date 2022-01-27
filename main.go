@@ -29,10 +29,6 @@ import (
 	_patientRepo "finalproject/features/patient/data"
 	_patientController "finalproject/features/patient/presentation"
 
-	_recipeService "finalproject/features/recipe/bussiness"
-	_recipeRepo "finalproject/features/recipe/data"
-	_recipeController "finalproject/features/recipe/presentation"
-
 	_dbDriver "finalproject/config"
 
 	_driverFactory "finalproject/drivers"
@@ -61,12 +57,17 @@ func init() {
 func dbMigrate(db *gorm.DB) {
 	db.AutoMigrate(
 		&_adminRepo.Admins{},
-		&_doctorRepo.Doctor{},
 		&_docsesRepo.Docses{},
+	)
+	db.AutoMigrate(
+		&_doctorRepo.Doctor{},
+	)
+	db.AutoMigrate(
 		&_patientRepo.Patient{},
-		&_patientsesRepo.Patientses{},
 		&_patscheRepo.Patsche{},
-		&_recipeRepo.Recipe{},
+	)
+	db.AutoMigrate(
+		&_patientsesRepo.Patientses{},
 	)
 }
 
@@ -116,9 +117,6 @@ func main() {
 	patientsesService := _patientsesService.NewServicePatientses(patientsesRepo)
 	patientsesCtrl := _patientsesController.NewHandlerPatientses(patientsesService)
 
-	recipeRepo := _driverFactory.NewRecipeRepository(db)
-	recipeService := _recipeService.NewServiceRecipe(recipeRepo)
-	recipeCtrl := _recipeController.NewHandlerRecipe(recipeService)
 
 	routesInit := _routes.RouteList{
 		JWTMiddleware: configJWT.Init(),
@@ -128,7 +126,6 @@ func main() {
 		PatientRouter: *patientCtrl,
 		PatientsesRouter: *patientsesCtrl,
 		PatscheRouter: *patscheCtrl,
-		RecipeRouter: *recipeCtrl,
 	}
 
 	routesInit.RouteRegister(e)

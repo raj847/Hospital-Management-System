@@ -11,7 +11,6 @@ type Domain struct {
 	Gender    string
 	Phone     string
 	Address   string
-	Symptoms  string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
@@ -31,3 +30,4 @@ type Repository interface {
 	Delete(patID, id int) (string, error)
 	PatientByID(id int) (Domain, error)
 }
+

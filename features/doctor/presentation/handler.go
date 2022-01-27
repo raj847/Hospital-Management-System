@@ -59,9 +59,10 @@ func (ctrl *DoctorHandler) Login(c echo.Context) error {
 
 	return response.NewSuccessResponse(c, response.FromDomainLogin(result))
 }
+
 func (ctrl *DoctorHandler) Update(c echo.Context) error {
 
-	updateReq := request.Doctor{}
+	updateReq := request.DoctorUp{}
 
 	if err := c.Bind(&updateReq); err != nil {
 		return response.NewErrorResponse(c, http.StatusBadRequest, err)
@@ -70,7 +71,7 @@ func (ctrl *DoctorHandler) Update(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 
 	getData, _ := ctrl.doctorHand.DoctorByID(id)
-	result, err := ctrl.doctorHand.Update(id, updateReq.ToDomain())
+	result, err := ctrl.doctorHand.Update(id, updateReq.ToDomainUp())
 	result.ID = getData.ID
 
 	result.Name = getData.Name
@@ -80,6 +81,34 @@ func (ctrl *DoctorHandler) Update(c echo.Context) error {
 	}
 
 	return response.NewSuccessResponse(c, response.FromDomainUpdateDoctor(result))
+
+}
+
+func (ctrl *DoctorHandler) ChangePass(c echo.Context) error {
+
+	changeReq := request.ChangePass{}
+
+	if err := c.Bind(&changeReq); err != nil {
+		return response.NewErrorResponse(c, http.StatusBadRequest, err)
+	}
+
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	getData, _ := ctrl.doctorHand.DoctorByID(id)
+	result, err := ctrl.doctorHand.ChangePass(id, changeReq.ToDomainChange())
+	result.ID = getData.ID
+
+	result.Name = getData.Name
+
+	if changeReq.ConfirmPass != changeReq.Password {
+		return response.NewErrorResponse1(c, http.StatusBadRequest, err)
+	}
+
+	if err != nil {
+		return response.NewErrorResponse(c, http.StatusBadRequest, err)
+	}
+
+	return response.NewSuccessResponse(c, response.FromDomainUpdatePassword(result))
 
 }
 func (ctrl *DoctorHandler) DoctorByID(c echo.Context) error {
@@ -92,6 +121,7 @@ func (ctrl *DoctorHandler) DoctorByID(c echo.Context) error {
 	}
 	return response.NewSuccessResponse(c, response.FromDomainAllDoctor(result))
 }
+
 func (ctrl *DoctorHandler) Delete(c echo.Context) error {
 
 	orgzID := middleware.GetUser(c)
@@ -106,6 +136,7 @@ func (ctrl *DoctorHandler) Delete(c echo.Context) error {
 	return response.NewSuccessResponse(c, result)
 
 }
+
 func (ctrl *DoctorHandler) AllDoctor(c echo.Context) error {
 
 	result, err := ctrl.doctorHand.AllDoctor()

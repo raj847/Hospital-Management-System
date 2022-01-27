@@ -69,6 +69,14 @@ func NewErrorResponse(c echo.Context, status int, err error) error {
 	return c.JSON(status, response)
 }
 
+func NewErrorResponse1(c echo.Context, status int, err error) error {
+	response := BaseResponse{}
+	response.Meta.Status = status
+	response.Meta.Message = "Password Not Same"
+
+	return c.JSON(status, response)
+}
+
 func FromDomainRegister(domain doctor.Domain) DoctorRegisterResponse {
 	return DoctorRegisterResponse{
 		Message:      "Register Doctor Success",
@@ -90,12 +98,21 @@ func FromDomainRegister(domain doctor.Domain) DoctorRegisterResponse {
 type DoctorLoginResponse struct {
 	Message string `json:"message"`
 	Token   string `json:"token"`
+	ID      int    `json:"id"`
+}
+
+type DoctorCPResponse struct {
+	ID        int       `json:"id:"`
+	Message   string    `json:"message"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func FromDomainLogin(domain doctor.Domain) DoctorLoginResponse {
 	return DoctorLoginResponse{
 		Message: "Doctor Login Success",
 		Token:   domain.Token,
+		ID:      domain.ID,
 	}
 }
 func FromDomainUpdateDoctor(domain doctor.Domain) DoctorRegisterResponse {
@@ -103,7 +120,6 @@ func FromDomainUpdateDoctor(domain doctor.Domain) DoctorRegisterResponse {
 		Message:      "Update Doctor Success",
 		ID:           domain.ID,
 		Username:     domain.Username,
-		Password:     domain.Password,
 		Name:         domain.Name,
 		NIP:          domain.NIP,
 		Experience:   domain.Experience,
@@ -113,6 +129,15 @@ func FromDomainUpdateDoctor(domain doctor.Domain) DoctorRegisterResponse {
 		Status:       domain.Status,
 		CreatedAt:    domain.CreatedAt,
 		UpdatedAt:    domain.UpdatedAt,
+	}
+}
+
+func FromDomainUpdatePassword(domain doctor.Domain) DoctorCPResponse {
+	return DoctorCPResponse{
+		ID:        domain.ID,
+		Message:   "Update Password Success",
+		CreatedAt: domain.CreatedAt,
+		UpdatedAt: domain.UpdatedAt,
 	}
 }
 
