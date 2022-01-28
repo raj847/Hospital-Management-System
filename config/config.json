@@ -7,11 +7,13 @@
     "timeout": 2
   },
   "database": {
-    "host": "hms",
+
+    "host": "finalproject.cvtknwsvykds.us-east-2.rds.amazonaws.com",
     "port": "3306",
-    "user": "root",
-    "pass": "123456",
-    "name": "db_hms"
+    "user": "admin",
+    "pass": "Finalproject",
+    "name": "finalproject"
+
   },
   "jwt": {
     "secret": "db_hms",

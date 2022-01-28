@@ -26,13 +26,13 @@ import (
 )
 
 type RouteList struct {
-	JWTMiddleware middleware.JWTConfig
-	AdminRouter   admins.AdminHandler
-	DoctorRouter  doctor.DoctorHandler
-	DocsesRouter  docses.DocsesHandler
-	PatientRouter patient.PatientHandler
-	PatientsesRouter  patientses.PatientsesHandler
-	PatscheRouter patsche.PatscheHandler
+	JWTMiddleware    middleware.JWTConfig
+	AdminRouter      admins.AdminHandler
+	DoctorRouter     doctor.DoctorHandler
+	DocsesRouter     docses.DocsesHandler
+	PatientRouter    patient.PatientHandler
+	PatientsesRouter patientses.PatientsesHandler
+	PatscheRouter    patsche.PatscheHandler
 }
 
 func (cl *RouteList) RouteRegister(e *echo.Echo) {
@@ -72,9 +72,9 @@ func (cl *RouteList) RouteRegister(e *echo.Echo) {
 	//Doctor
 	e.GET("/doctor", cl.DoctorRouter.AllDoctor)
 	e.GET("/doctor/:id", cl.DoctorRouter.DoctorByID)
-	
+
 	//Patients
-	e.GET("/patient",cl.PatientRouter.AllPatient)
+	e.GET("/patient", cl.PatientRouter.AllPatient)
 	e.GET("/patient/:id", cl.PatientRouter.PatientByID)
 
 	//Patientsche
@@ -86,7 +86,7 @@ func (cl *RouteList) RouteRegister(e *echo.Echo) {
 	e.GET("/docses/:id", cl.DocsesRouter.DocsesByID)
 
 	//Patientses
-	e.GET("/patientses",cl.PatientsesRouter.AllPatientses)
+	e.GET("/patientses", cl.PatientsesRouter.AllPatientses)
 	e.GET("/patientses/:id", cl.PatientsesRouter.PatientsesByID)
 
 }

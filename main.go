@@ -43,7 +43,7 @@ import (
 )
 
 func init() {
-	viper.SetConfigFile(`config/config.json`)
+	viper.SetConfigFile(`config.json`)
 	err := viper.ReadInConfig()
 	if err != nil {
 		panic(err)
@@ -117,15 +117,14 @@ func main() {
 	patientsesService := _patientsesService.NewServicePatientses(patientsesRepo)
 	patientsesCtrl := _patientsesController.NewHandlerPatientses(patientsesService)
 
-
 	routesInit := _routes.RouteList{
-		JWTMiddleware: configJWT.Init(),
-		AdminRouter:   *adminCtrl,
-		DoctorRouter:  *doctorCtrl,
-		DocsesRouter:  *docsesCtrl,
-		PatientRouter: *patientCtrl,
+		JWTMiddleware:    configJWT.Init(),
+		AdminRouter:      *adminCtrl,
+		DoctorRouter:     *doctorCtrl,
+		DocsesRouter:     *docsesCtrl,
+		PatientRouter:    *patientCtrl,
 		PatientsesRouter: *patientsesCtrl,
-		PatscheRouter: *patscheCtrl,
+		PatscheRouter:    *patscheCtrl,
 	}
 
 	routesInit.RouteRegister(e)
