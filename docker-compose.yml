@@ -7,9 +7,35 @@ services:
       context: .
       dockerfile: Dockerfile
 
+    depends_on:
+      - db-hms
+    container_name: server
+    hostname: server
+    networks:
+      - mynetwork
+
     ports:
       - 8080:8080
 
     deploy:
       restart_policy:
         condition: on-failure
+
+  db-hms:
+    image: mysql:8.0
+    container_name: hms
+    hostname: db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com
+    networks:
+      - mynetwork
+    volumes:
+      - db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com-volume:/var/lib/mysql
+    environment:
+      - MYSQL_USER=admin
+      - MYSQL_ROOT_PASSWORD=12345678
+
+volumes:
+  db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com-volume:
+
+networks:
+  mynetwork:
+    driver: bridge
