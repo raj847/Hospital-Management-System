@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   server:
-    image: hms:latest
+    image: prudenca08/cicd-be:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -28,7 +28,7 @@ services:
     networks:
       - mynetwork
     volumes:
-      - hms-volume:/var/lib/hms
+      - hms-volume:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?database password not set}
 

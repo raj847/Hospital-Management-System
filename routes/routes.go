@@ -68,6 +68,7 @@ func (cl *RouteList) RouteRegister(e *echo.Echo) {
 	doctor.PUT("/change-password/:id", cl.DoctorRouter.ChangePass, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationDoctor())
 	doctor.PUT("/update-patientses/:id", cl.PatientsesRouter.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationDoctor())
 
+
 	//Doctor
 	e.GET("/doctor", cl.DoctorRouter.AllDoctor)
 	e.GET("/doctor/:id", cl.DoctorRouter.DoctorByID)

@@ -7,6 +7,7 @@
 
 # RUN go mod download
 
+
 # COPY . .
 
 # RUN go build -o mainfile
@@ -24,8 +25,11 @@ RUN go build -o main main.go
 #RUN STAGE
 FROM alpine:3.14 
 WORKDIR /finalproject
-COPY --from=builder /finalproject/config/config.json . 
+
+RUN mkdir config
+COPY --from=builder /finalproject/config/config.json config
 COPY --from=builder /finalproject/main .
 EXPOSE 8080
 
 CMD ["/finalproject/main"]
+
