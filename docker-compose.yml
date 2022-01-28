@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
 
     depends_on:
-      - db-hms
+      - hms
     container_name: server
     hostname: server
     networks:
@@ -21,20 +21,19 @@ services:
       restart_policy:
         condition: on-failure
 
-  db-hms:
+  hms:
     image: mysql:8.0
     container_name: hms
-    hostname: db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com
+    hostname: hms
     networks:
       - mynetwork
     volumes:
-      - db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com-volume:/var/lib/mysql
+      - hms-volume:/var/lib/mysql
     environment:
-      - MYSQL_USER=admin
-      - MYSQL_ROOT_PASSWORD=12345678
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?database password not set}
 
 volumes:
-  db-hms.cvkywxwrdmsr.ap-southeast-1.rds.amazonaws.com-volume:
+  hms-volume:
 
 networks:
   mynetwork:
